@@ -46,9 +46,17 @@ def build_model():
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
-        ('clf', MultiOutputClassifier(RandomForestClassifier(criterion="entropy")))
+        ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
-    return pipeline
+
+    parameters = {
+        'clf__estimator__criterion': ["gini", "entropy"]
+    }
+
+    cv = GridSearchCV(pipeline, param_grid=parameters)
+    
+    return cv
+
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
@@ -63,6 +71,8 @@ def evaluate_model(model, X_test, Y_test, category_names):
         evaluation_report = classification_report(Y_test[:, index], Y_pred[:, index])
         index += 1
         print(evaluation_report)
+
+    print("Best param of the model: {}".format(model.best_params_))
 
 
 def save_model(model, model_filepath):

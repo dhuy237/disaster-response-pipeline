@@ -2,6 +2,7 @@ import sys
 import pandas as pd
 from sqlalchemy import create_engine
 
+
 def load_data(messages_filepath, categories_filepath):
     """ Load and join input raw data """
 
@@ -31,15 +32,16 @@ def clean_data(df):
     
     df = df.drop("categories", axis=1)
     
-    # concatenate the original dataframe with the new `categories` dataframe
+    # Concatenate the original dataframe with the new `categories` dataframe
     df = pd.concat([df, categories], sort=False, axis=1)
 
-    # drop duplicates
+    # Drop duplicates
     df = df.drop_duplicates()
-    
+
+    # Replace value "2" with "0" because record contains "2" is very small
+    df['related'] = df['related'].replace(2, 0)
+
     return df
-
-
 
 
 def save_data(df, database_filename):

@@ -2,6 +2,8 @@
 
 This repository is the work for my second project from the Udacity Data Scientist Nanodegree Program. In this project, I applied data engineering skills to build an ETL pipeline to process the raw data then the data will go through an ML pipeline to classify data.
 
+The classification model will help the people from disaster organizations classify the message into related categories so they can respond to the event more accurately and faster.
+
 ## :rocket: Table of contents
 
 1. [Prerequisites](#prerequisites)
