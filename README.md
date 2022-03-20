@@ -32,9 +32,12 @@ These are libraries that is used in this project:
 │   ├── disaster_categories.csv # Input data to process
 │   ├── disaster_messages.csv # Input data to process
 │   └── process_data.py # ETL pipeline
-└── models
-    └── train_classifier.py # ML pipeline
-    └── classifier.pkl # Saved model. Please run the ML pipeline to create this file.
+├── models
+│   └── train_classifier.py # ML pipeline
+│    └── classifier.pkl # Saved model. Please run the ML pipeline to create this file.
+└── notebook # notebook used for preparing the code
+    ├── ETL Pipeline Preparation.ipynb
+    └── ML Pipeline Preparation.ipynb
 ```
 
 ### Instructions <a name="instructions"></a>

@@ -16,6 +16,8 @@ from sklearn.model_selection import GridSearchCV
 import pickle
 
 def load_data(database_filepath):
+    """ Load data from database """
+
     engine = create_engine('sqlite:///' + database_filepath)
     df = pd.read_sql_table("message", engine)
     X = df['message'].values
@@ -25,6 +27,8 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    """ Tokenize the text data """
+
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -37,6 +41,8 @@ def tokenize(text):
 
 
 def build_model():
+    """ Create model pipeline """
+
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
@@ -46,6 +52,8 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """ Evaluate the model performance """
+
     # Predict on test data
     Y_pred = model.predict(X_test)
 
@@ -58,6 +66,8 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
+    """ Save model as pickle file """
+
     pickle.dump(model, open(model_filepath, 'wb'))
 
 
